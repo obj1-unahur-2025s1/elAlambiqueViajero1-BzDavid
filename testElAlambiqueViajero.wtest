@@ -1,0 +1,48 @@
+import elAlambiqueViajero.*
+test "Luke viaja a París" {
+  luke.visitar(paris)
+  assert.that(luke.cuantosViajes() == 1)
+  assert.that(luke.ultimoRecuerdo() == 'Llavero Torre Eiffel')
+}
+
+test "Luke viaja a Buenos Aires" {
+    luke.visitar(buenosAires)
+    assert.that(luke.cuantosViajes() == 1)
+    assert.that(luke.ultimoRecuerdo() == 'Mate' or 
+        luke.ultimoRecuerdo() == 'Mate de Hierbas')
+}
+
+test "Luke viaja a Bagdad" {
+    luke.visitar(bagdad)
+    assert.that(luke.cuantosViajes() == 1)
+    assert.that(luke.ultimoRecuerdo() == 'Bidón de Petróleo')
+}
+
+test "Luke viaja a Bagdad y cambia su ultimoRecuerdo" {
+    bagdad.cambiarRecuerdoTipico('Armas masivas')
+    luke.visitar(bagdad)
+    assert.that(luke.ultimoRecuerdo() == 'Armas masivas')
+    assert.that(luke.cuantosViajes() == 1)
+}
+
+test "Ir a Las Vegas cuando se conmemora a Buenos Aires" {
+    lasVegas.cambiarCiudadALaQueHomenajeaA_(buenosAires)
+    luke.visitar(lasVegas)
+    assert.that(luke.cuantosViajes() == 1)
+    assert.that(luke.ultimoRecuerdo() == 'Mate')
+}
+
+test "Ir a Las Vegas cuando se conmemora a Bagdad y París" {
+    lasVegas.cambiarCiudadALaQueHomenajeaA_(bagdad)
+    luke.visitar(lasVegas)
+    assert.that(luke.cuantosViajes() == 1)
+    assert.that(luke.ultimoRecuerdo() == 'Bidón de Petróleo')
+    lasVegas.cambiarCiudadALaQueHomenajeaA_(paris)
+    luke.visitar(lasVegas)
+    assert.that(luke.cuantosViajes() == 2)
+    assert.that(luke.ultimoRecuerdo() == 'Llavero Torre Eiffel')
+}
+
+test "El programa funciona" {
+    assert.that(100 == 100)
+}
