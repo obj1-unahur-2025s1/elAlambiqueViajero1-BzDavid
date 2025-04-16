@@ -43,6 +43,15 @@ test "Ir a Las Vegas cuando se conmemora a Bagdad y París" {
     assert.that(luke.ultimoRecuerdo() == 'Llavero Torre Eiffel')
 }
 
+test "Luke cambia su vehículo y viaja" {
+    luke.cambiarDeVehiculo(antiguallaBlindada)
+    assert.that(luke.vehiculoActual() == antiguallaBlindada)
+    luke.visitar(buenosAires)
+    assert.that(luke.cuantosViajes() == 0)
+    //assert.that(luke.ultimoRecuerdo() == 'Mate')
+    //assert.that(luke.ultimoRecuerdo() == 'Mate de Hierbas')
+}
+
 test "El programa funciona" {
     assert.that(100 == 100)
 }

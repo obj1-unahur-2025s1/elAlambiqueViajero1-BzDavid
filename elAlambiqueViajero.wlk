@@ -8,9 +8,9 @@ object luke {
     method cuantosViajes() = cantidadDeViajes
 
     method visitar(lugarAVisitar) {
-        if (lugarAVisitar.requerimientoDeviaje()) {
+        if (lugarAVisitar.requerimientoDeViaje()) {
         vehiculoActual.viajar()
-        cantidadDeViajes += 1
+        cantidadDeViajes = cantidadDeViajes + 1
         recuerdo = lugarAVisitar.recuerdoTipico()
         }
     }
