@@ -63,6 +63,7 @@ object bagdad {
     method requerimientoDeViaje() = true
 }
 
+
 object lasVegas {
     var ciudadALaQueHomenajea = null
 
@@ -75,6 +76,40 @@ object lasVegas {
     method recuerdoTipico() = ciudadALaQueHomenajea.recuerdoTipico()
 
     method requerimientoDeViaje() = ciudadALaQueHomenajea.requerimientoDeViaje()
+}
+
+object antartida {
+    var recuerdoTipico = 'Hielo con Huella de Pinguino'
+
+    var esInvierno = true
+
+    var cantidadDeIglus = 10
+
+    method cambiarCantidadDeIglus(nuevaCantidad) {
+        cantidadDeIglus = nuevaCantidad
+    }
+    
+
+    method cambiarTemporada() {
+        esInvierno = not esInvierno
+        if(esInvierno) {
+            recuerdoTipico = 'Hielo con Huella de Pinguino'
+            self.cambiarCantidadDeIglus(cantidadDeIglus + 0.5)
+        } 
+        else {
+            recuerdoTipico = 'Abrigo de Lana'
+            self.cambiarCantidadDeIglus(cantidadDeIglus - 1)
+        }
+    }
+
+    method recuerdoTipico() = recuerdoTipico
+
+    method esInvierno() = esInvierno
+
+    method hayRefugios() = cantidadDeIglus > 1
+
+    method requerimientoDeViaje() = not esInvierno and 
+        self.hayRefugios()
 }
 
 // Vehículos
@@ -115,14 +150,49 @@ object superChatarraEspecial {
 
     var municionDisponible = 100
 
+    method cambiarCantidadDeMunicion(nuevaCantidad) {
+        municionDisponible = nuevaCantidad
+    }
+
+    method cambiarCantidadDeMisiles(nuevaCantidad) {
+        misilesCargados = nuevaCantidad
+    }
+
+    method cargarMunicion() {
+        self.cambiarCantidadDeMunicion(municionDisponible + 10)
+    }
+
+    method cargarMisil() {
+        self.cambiarCantidadDeMisiles(misilesCargados + 1)
+    }
+
+    method dispararMuniciones(){
+        self.cambiarCantidadDeMunicion(municionDisponible - 10)
+    }
+
+    method dispararMisil() {
+        self.cambiarCantidadDeMisiles(misilesCargados - 1)
+    }
+
     method viajar() {
-        
+        self.arrancarALosTiros()
+    }
+
+    method arrancarALosTiros() {
+        if(self.tieneCombustible()) {
+            self.dispararMuniciones()
+            self.dispararMisil()
+        }
     }
 
     method esVeloz() = true
 
-    method tieneCombustible() = (misilesCargados * 10) +
-        (municionDisponible) >= 50
+    method hayMisilesSuficientesParaViajar() = misilesCargados >= 1
+
+    method hayMunicionSuficientesParaViajar() = municionDisponible >= 10
+
+    method tieneCombustible() = self.hayMisilesSuficientesParaViajar() and 
+        self.hayMunicionSuficientesParaViajar()
 }
 
 object antiguallaBlindada {
@@ -143,14 +213,29 @@ object antiguallaBlindada {
     method viajar() {
         /*Observación: Los gangsters viajan, siempre que llegan
         a un destino, uno se baja.*/
-        if(tieneCombustible) {
-            self.cambiarCantidadDeGangsters(cantidadDeGangsters - 1)
-        }
+        self.cambiarCantidadDeGangsters(cantidadDeGangsters - 1)
+        
     }
 
     method esVeloz() = esVeloz
 
     method tieneCombustible() = tieneCombustible
+}
+
+object superConvertible {
+    var vehiculoMimetizado = alambiqueVeloz
+    
+    method viajar() {
+        vehiculoMimetizado.viajar()
+    }
+
+    method convertirVehiculoA_(unVehiculo){
+        vehiculoMimetizado = unVehiculo
+    }
+
+    method esVeloz() = vehiculoMimetizado.esVeloz()
+
+    method tieneCombustible() = vehiculoMimetizado.tieneCombustible()
 }
 
 
