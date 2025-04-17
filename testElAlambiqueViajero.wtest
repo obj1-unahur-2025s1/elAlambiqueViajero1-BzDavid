@@ -45,11 +45,11 @@ test "Ir a Las Vegas cuando se conmemora a Bagdad y París" {
 
 test "Luke cambia su vehículo y viaja" {
     luke.cambiarDeVehiculo(antiguallaBlindada)
-    assert.that(luke.vehiculoActual() == antiguallaBlindada)
+    antiguallaBlindada.cambiarCantidadDeGangsters(1)
+    assert.equals(antiguallaBlindada, luke.vehiculoActual())
     luke.visitar(buenosAires)
-    assert.that(luke.cuantosViajes() == 0)
-    //assert.that(luke.ultimoRecuerdo() == 'Mate')
-    //assert.that(luke.ultimoRecuerdo() == 'Mate de Hierbas')
+    assert.equals(1, luke.cuantosViajes())
+    assert.that(luke.ultimoRecuerdo() == 'Mate' or luke.ultimoRecuerdo() == 'Mate de Hierbas')
 }
 
 test "El programa funciona" {
